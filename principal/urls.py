@@ -3,21 +3,25 @@ from django.contrib.auth import views as auth_views
 from . import views
 
 urlpatterns = [
-    path('home/', views.index, name='index'),  # Página principal
+    # 🏠 Página principal
+    path('', views.index, name='index'),            # URL raíz
+    path('home/', views.index, name='home'),
+
+    # 📄 Páginas informativas
     path('sidebar_left/', views.sidebar_left, name='sidebar_left'),
     path('sidebar_right/', views.sidebar_right, name='sidebar_right'),
     path('contact/', views.contact, name='contact'),
     path('about/', views.about, name='about'),
 
-    # 🟩 Autenticación y acceso
+    # 🔐 Autenticación
     path('registrar/', views.registrar, name='registrar'),
     path('login/', views.login, name='login'),
     path('logout/', views.logout_view, name='logout'),
-    path("recuperar/", views.recuperar_contraseña, name="recuperar"),
-    path("correo-enviado/", views.correo_enviado, name="correo_enviado"),
-    path("restablecer/<str:token>/", views.restablecer_contraseña, name="restablecer"),
+    path('recuperar/', views.recuperar_contraseña, name='recuperar'),
+    path('correo-enviado/', views.correo_enviado, name='correo_enviado'),
+    path('restablecer/<str:token>/', views.restablecer_contraseña, name='restablecer'),
 
-    # 🏠 Página principal
+    # 🏠 Dashboard / Inicio
     path('inicio/', views.inicio, name='inicio'),
 
     # 👥 Empleados
@@ -27,11 +31,11 @@ urlpatterns = [
 
     # 📊 Reportes
     path('reportes/', views.reportes, name='reportes'),
-    path('reportes_descarga/', views.reportes_descarga, name='reportes_descarga'),  # URL para la página de descargas
+    path('reportes_descarga/', views.reportes_descarga, name='reportes_descarga'),
     path('reporte_individual/', views.reporte_individual, name='reporte_individual'),
     path('reporte_general/', views.reporte_general, name='reporte_general'),
     path('reporte_nomina/', views.reporte_nomina, name='reporte_nomina'),
 
     # ⚙️ Configuración
     path('configuracion/', views.configuracion, name='configuracion'),
-] 
+]
