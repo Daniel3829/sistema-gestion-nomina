@@ -1,0 +1,391 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
+	
+	<title>Pagina Principal | TecNómina</title>
+
+	<link rel="shortcut icon" href="{% static 'images/logo_pestana.png' %}">
+	
+	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap1.min.css' %}">
+	<link rel="stylesheet" href="{% static 'vendor/css/util.css' %}">
+	<link rel="stylesheet" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+
+	<!-- Custom styles for our template -->
+	<link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap-theme.css' %}" media="screen" >
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="assets/js/html5shiv.js"></script>
+	<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body class="home">
+	<!-- Fixed navbar -->
+	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
+		<div class="container">
+			<div class="navbar-header">
+				<!-- Button for smallest screens -->
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+				<a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'images/TecNomina1.png' %}" alt="Progressus HTML5 template" style="height: 45px; width: auto; margin-right: 100px;"></a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav pull-right">
+					<li class="active"><a href="{% url 'index' %}">Inicio</a></li>
+					<li><a href="{% url 'about' %}">Nosotros</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Servicios <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="{% url 'sidebar_left' %}">Cálculo de Nómina</a></li>
+							<li class="active"><a href="{% url 'sidebar_right' %}">Gestión de Empleados</a></li>
+						</ul>
+					</li>
+					<li><a href="{% url 'contact' %}">Contacto</a></li>
+					<li><a class="btn" href="{% url 'login' %}">Iniciar sesión / Registrarse</a></li>
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div>
+	</div> 
+	<!-- /.navbar -->
+
+	<!-- Header -->
+	<header id="head">
+		<div class="container">
+			<div class="row">
+				<h1 class="lead">Gestión de Nómina Inteligente y Eficiente</h1>
+				<p class="tagline"><strong>TecNomina: tecnología que optimiza los procesos laborales de tu empresa.</strong></p>
+				<p><a class="btn btn-default btn-lg" role="button">Descubrir más</a> <a class="btn btn-action btn-lg" role="button">Contactanos</a></p>
+			</div>
+		</div>
+	</header>
+	<!-- /Header -->
+
+	<!-- Intro -->
+	<div class="container intro-section text-center">
+		<div class="intro-content">
+			<h2 class="intro-title">Simplifica la gestión de tu nómina con <span>confianza</span> y <span>tecnología</span></h2>
+			<p class="intro-text">
+			En <strong>TecNomina</strong> transformamos los procesos de nómina en experiencias rápidas, seguras y eficientes.<br>
+			Dedícate a lo importante: <em>nosotros nos encargamos del resto.</em>
+			</p>
+		</div>
+	</div>
+	<!-- /Intro -->
+
+		
+	<!-- Highlights - jumbotron -->
+	<!-- Intro Features -->
+	<div class="jumbotron top-space" style="background: linear-gradient(135deg, #f8fbff 0%, #eef4fa 100%); padding: 60px 0; border-radius: 10px;">
+		<div class="container text-center">
+			<h3 class="thin mb-5" style="font-weight: 700; color: #007bff; letter-spacing: 0.5px;">
+			¿Por qué elegir <span style="color:#0056b3;">TecNomina</span>?
+			</h3>
+
+			<div class="row g-4 justify-content-center">
+
+			<!-- Feature 1 -->
+			<div class="col-md-3 col-sm-6 highlight" style="background:#fff; border-radius:15px; padding:25px 15px; box-shadow:0 3px 12px rgba(0,0,0,0.06); transition:all 0.3s ease;">
+				<div class="h-caption mb-3">
+				<i class="fa fa-cogs fa-3x mb-3" style="color:#007bff;"></i>
+				<h4 style="font-weight:600; color:#333;">Automatización total</h4>
+				</div>
+				<div class="h-body text-center">
+				<p style="font-size:1.2rem; color:#555; line-height:1.6;">
+					Genera y gestiona la nómina de forma automática, reduciendo errores y ahorrando tiempo en cada proceso.
+				</p>
+				</div>
+			</div>
+
+			<!-- Feature 2 -->
+			<div class="col-md-3 col-sm-6 highlight" style="background:#fff; border-radius:15px; padding:25px 15px; box-shadow:0 3px 12px rgba(0,0,0,0.06); transition:all 0.3s ease; ">
+				<div class="h-caption mb-3">
+				<i class="fa fa-shield fa-3x mb-3" style="color:#00a8ff;"></i>
+				<h4 style="font-weight:600; color:#333;">Seguridad y confianza</h4>
+				</div>
+				<div class="h-body text-center">
+				<p style="font-size:1.2rem; color:#555; line-height:1.6;">
+					Tus datos están protegidos con altos estándares de seguridad, garantizando confidencialidad y respaldo constante.
+				</p>
+				</div>
+			</div>
+
+			<!-- Feature 3 -->
+			<div class="col-md-3 col-sm-6 highlight" style="background:#fff; border-radius:15px; padding:25px 15px; box-shadow:0 3px 12px rgba(0,0,0,0.06); transition:all 0.3s ease;">
+				<div class="h-caption mb-3">
+				<i class="fa-solid fa-chart-line fa-3x mb-3" style="color:#28a745;"></i>
+				<h4 style="font-weight:600; color:#333;">Reportes inteligentes</h4>
+				</div>
+				<div class="h-body text-center">
+				<p style="font-size:1.2rem; color:#555; line-height:1.6;">
+					Accede a informes detallados y visuales que te ayudan a tomar decisiones rápidas y acertadas sobre tu gestión de nómina.
+				</p>
+				</div>
+			</div>
+
+			<!-- Feature 4 -->
+			<div class="col-md-3 col-sm-6 highlight" style="background:#fff; border-radius:15px; padding:25px 15px; box-shadow:0 3px 12px rgba(0,0,0,0.06); transition:all 0.3s ease;">
+				<div class="h-caption mb-3">
+				<i class="fa fa-smile-o fa-3x mb-3" style="color:#ff9800;"></i>
+				<h4 style="font-weight:600; color:#333;">Soporte y acompañamiento</h4>
+				</div>
+				<div class="h-body text-center">
+				<p style="font-size:1.2rem; color:#555; line-height:1.6;">
+					Contamos con un equipo listo para ayudarte en cada paso, brindando soluciones personalizadas para tu empresa o institución.
+				</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	</div>
+
+	<!-- /Highlights -->
+
+	<!-- container -->
+	<div class="container">
+
+		<!-- ===== FAQ SECTION ===== -->
+		<section style="background:#fff; padding:60px 0;">
+		<div class="container">
+			<h2 class="text-center top-space" style="font-weight:700; color:#333; margin-bottom:40px;">
+			Preguntas Frecuentes
+			</h2>
+
+			<style>
+			/* Estilos internos para hover y alineación */
+			.faq-card {
+				background:#fff;
+				border-radius:10px;
+				padding:25px;
+				box-shadow:0 4px 12px rgba(0,0,0,0.06);
+				height:100%;
+				transition:all 0.35s ease;
+				display:flex;
+				flex-direction:column;
+				justify-content:center;
+			}
+
+			.faq-card:hover {
+				transform:translateY(-6px);
+				box-shadow:0 8px 20px rgba(0,0,0,0.12);
+			}
+
+			.faq-card h3 {
+				color:#007bff;
+				font-size:2rem;
+				margin-bottom:12px;
+				text-align:center;
+			}
+
+			.faq-card p {
+				color:#555;
+				line-height:1.7;
+				font-size:1.15rem;
+				text-align:justify;
+			}
+
+			/* Asegurar que las columnas se igualen visualmente */
+			.faq-row {
+				display:flex;
+				flex-wrap:wrap;
+				align-items:stretch;
+			}
+
+			@media (max-width:768px) {
+				.faq-card h3 { font-size:1.5rem; }
+				.faq-card p { font-size:1rem; }
+			}
+			</style>
+
+			<!-- Primera fila -->
+			<div class="row faq-row">
+			<!-- FAQ 1 -->
+			<div class="col-sm-6" style="padding:20px;">
+				<div class="faq-card">
+				<h3>¿Qué es TecNomina?</h3>
+				<p>
+					TecNomina es una plataforma diseñada para automatizar y optimizar la gestión de nómina en empresas e instituciones. 
+					Simplifica procesos como el cálculo de salarios, deducciones y reportes, todo desde un entorno digital intuitivo y seguro.
+				</p>
+				</div>
+			</div>
+
+			<!-- FAQ 2 -->
+			<div class="col-sm-6" style="padding:20px;">
+				<div class="faq-card">
+				<h3>¿Necesito conocimientos técnicos para usar TecNomina?</h3>
+				<p>
+					No. La plataforma está pensada para ser fácil de usar. Su diseño intuitivo permite que cualquier usuario, sin conocimientos técnicos avanzados, 
+					pueda gestionar la nómina de manera eficiente desde el primer día.
+				</p>
+				</div>
+			</div>
+			</div>
+
+			<!-- Segunda fila -->
+			<div class="row faq-row">
+			<!-- FAQ 3 -->
+			<div class="col-sm-6" style="padding:20px;">
+				<div class="faq-card">
+				<h3>¿Qué beneficios ofrece frente a una nómina tradicional?</h3>
+				<p>
+					TecNomina reduce los errores manuales, acelera los cálculos y genera reportes automáticos. Además, almacena toda la información de forma centralizada y segura, 
+					ahorrando tiempo y esfuerzo administrativo.
+				</p>
+				</div>
+			</div>
+
+			<!-- FAQ 4 -->
+			<div class="col-sm-6" style="padding:20px;">
+				<div class="faq-card">
+				<h3>¿Puedo adaptar TecNomina a las necesidades de mi empresa?</h3>
+				<p>
+					Sí. Nuestro sistema es totalmente adaptable. Puedes configurar parámetros como tipos de contratos, deducciones, bonificaciones y más, 
+					según las políticas de tu empresa o institución.
+				</p>
+				</div>
+			</div>
+			</div>
+		</div>
+		</section>
+
+
+		<!-- ===== CTA JUMBOTRON ===== -->
+		<div class="jumbotron top-space" 
+			style="background:linear-gradient(135deg,#e3f2fd 0%,#bbdefb 100%);
+					border-radius:12px; padding:50px 30px; 
+					box-shadow:0 4px 15px rgba(0,0,0,0.08); text-align:center;">
+
+		<div class="container" style="max-width:995px; margin:auto;">
+
+			<h4 style="font-size:2rem; color:#333; line-height:1.7; font-weight:400; margin-bottom:25px;">
+			En <strong style="color:#007bff;">TecNómina</strong> simplificamos la gestión de nómina para que puedas concentrarte 
+			en lo que realmente importa: hacer crecer tu empresa. 
+			Nuestro sistema es rápido, intuitivo y diseñado para facilitar tu trabajo.
+			</h4>
+
+			<!-- Botón con animación -->
+			<a href="sidebar-left.html" class="btn btn-primary btn-lg" 
+			style="border:none; border-radius:30px; padding:12px 35px; font-weight:500; 
+					background:linear-gradient(135deg,#007bff,#00b4d8);
+					transition:all 0.3s ease; box-shadow:0 4px 12px rgba(0,0,0,0.2);">
+			Conoce más »
+			</a>
+		</div>
+		</div>
+
+</div>	<!-- /container -->
+	
+	<!-- Social links. @TODO: replace by link/instructions in template -->
+	<section id="social">
+		<div class="container">
+			<div class="wrapper clearfix">
+				<!-- AddThis Button BEGIN -->
+				<div class="addthis_toolbox addthis_default_style">
+				<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+				<a class="addthis_button_tweet"></a>
+				<a class="addthis_button_linkedin_counter"></a>
+				<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+				</div>
+				<!-- AddThis Button END -->
+			</div>
+		</div>
+	</section>
+	<!-- /social links -->
+
+
+	<footer id="footer" class="top-space" style="margin-top: 40px;">
+
+		<div class="footer1">
+			<div class="container">
+				<div class="row">
+					
+					<div class="col-md-3 widget">
+						<h3 class="widget-title">Contactanos</h3>
+						<div class="widget-body">
+							<p>+57 000 195 3568<br>
+								<a href="mailto:#">TecNomina@gmail.com</a><br>
+								<br>
+								Facatativa, Cundinamarca. Colombia
+							</p>	
+						</div>
+					</div>
+
+					<div class="col-md-3 widget">
+						<h3 class="widget-title">Siguenos</h3>
+						<div class="widget-body">
+							<p class="follow-me-icons">
+								<a href="#"><i class="fab fa-twitter fa-lg"></i></a>
+								<a href="#"><i class="fab fa-dribbble fa-lg"></i></a>
+								<a href="#"><i class="fab fa-github fa-lg"></i></a>
+								<a href="#"><i class="fab fa-facebook fa-lg"></i></a>
+							</p>	
+						</div>
+					</div>
+
+					<div class="col-md-6 widget">
+						<h3 class="widget-title">Sobre TecNómina</h3>
+						<div class="widget-body">
+							<p>
+								En <strong>TecNómina</strong> trabajamos para ofrecerte una herramienta confiable y moderna para la gestión de nómina. 
+      							Nuestro objetivo es simplificar los procesos administrativos y brindar soluciones digitales eficientes para empresas y emprendedores.
+							</p>
+							<p> 
+								Creamos tecnología que impulsa la productividad y mejora la experiencia de los usuarios. ¡La innovación es parte de nuestro ADN!
+							</p>
+						</div>
+					</div>
+
+				</div> <!-- /row of widgets -->
+			</div>
+		</div>
+
+		<div class="footer2">
+			<div class="container">
+				<div class="row">
+					
+					<div class="col-md-6 widget">
+						<div class="widget-body">
+							<p class="simplenav">
+								<a href="#">Inicio</a> | 
+								<a href="about.html">Nosotros</a> |
+								<a href="sidebar-right.html">Servicios</a> |
+								<a href="contact.html">Contacto</a> |
+								<b><a href="signup.html">Inicio de sesión</a></b>
+							</p>
+						</div>
+					</div>
+
+					<div class="col-md-6 widget">
+						<div class="widget-body">
+							<p class="text-right">
+								Copyright &copy; 2025, TecNomina. Designed by <a href="http://gettemplate.com/" rel="designer">gettemplate</a> 
+							</p>
+						</div>
+					</div>
+
+				</div> <!-- /row of widgets -->
+			</div>
+		</div>
+
+	</footer>	
+
+	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script src="{% static 'js/headroom.min.js' %}"></script>
+	<script src="{% static 'js/jQuery.headroom.min.js' %}"></script>
+	<script src="{% static 'js/template.js' %}"></script>
+
+</body>
+</html>

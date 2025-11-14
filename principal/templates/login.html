@@ -1,0 +1,215 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Inicio de sesión | TecNómina</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="shortcut icon" href="{% static 'images/logo_pestana.png' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+
+	<style>
+		.wrap-login100 {
+		width: 960px;
+		background: #fff;
+		border-radius: 10px;
+		overflow: hidden;
+
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -moz-box;
+		display: -ms-flexbox;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		padding: 177px 130px 33px 95px;
+		}
+
+		/*------------------------------------------------------------------
+		[  ]*/
+		.login100-pic {
+			width: 396px;
+		}
+
+		.login100-pic img {
+			max-width: 100%;
+		}
+		.container-login100 {
+			width: 100%;  
+			min-height: 100vh;
+			display: -webkit-box;
+			display: -webkit-flex;
+			display: -moz-box;
+			display: -ms-flexbox;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			padding: 15px;
+			background: #9053c7;
+			background: -webkit-linear-gradient(-135deg, #1a6479, #1d926f);
+			background: -o-linear-gradient(-135deg, #1a6479, #1d926f);
+			background: -moz-linear-gradient(-135deg, #1a6479, #1d926f);
+			background: linear-gradient(-135deg, #1a6479, #1d926f);
+		}
+		.focus-input100 {
+			display: block;
+			position: absolute;
+			border-radius: 25px;
+			bottom: 0;
+			left: 0;
+			z-index: -1;
+			width: 100%;
+			height: 100%;
+			box-shadow: 0px 0px 0px 0px;
+			color: #1d926f;
+		}
+		.input100:focus + .focus-input100 + .symbol-input100 {
+			color: #1d926f;
+			padding-left: 28px;
+		}
+		.login100-form-btn {
+			font-family: Montserrat-Bold;
+			font-size: 15px;
+			line-height: 1.5;
+			color: #fff;
+			text-transform: uppercase;
+
+			width: 100%;
+			height: 50px;
+			border-radius: 25px;
+			background: #1d926f;
+			display: -webkit-box;
+			display: -webkit-flex;
+			display: -moz-box;
+			display: -ms-flexbox;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 0 25px;
+
+			-webkit-transition: all 0.4s;
+			-o-transition: all 0.4s;
+			-moz-transition: all 0.4s;
+			transition: all 0.4s;
+		}
+
+		.login100-form-btn:hover {
+			background: #1a6479;
+		}
+	</style>
+
+</head>
+<body>
+
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-pic js-tilt" data-tilt>
+                <img src="{% static 'images/TecNomina2.png' %}" alt="IMG">
+            </div>
+
+            <form id="formLogin" class="login100-form validate-form">
+                {% csrf_token %}
+                <span class="login100-form-title">Inicio de Sesión</span>
+
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="text" name="correo" placeholder="Correo" required>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </span>
+                </div>
+
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="password" name="contraseña" placeholder="Contraseña" required>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                    </span>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" type="submit">
+                        Iniciar sesión
+                    </button>
+                </div>
+
+				<div class="text-center p-t-20">
+					<a class="txt2" href="{% url 'recuperar' %}">
+						¿Olvidaste tu contraseña? <i class="fa fa-long-arrow-right m-l-5"></i>
+					</a>
+				</div>
+
+				<div class="text-center p-t-116">
+					<a class="txt2" href="{% url 'registrar' %}">
+						Registrarte <i class="fa fa-long-arrow-right m-l-5"></i>
+					</a>
+				</div>
+
+                <div id="loginError" style="color:red; margin-top:10px;"></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let cookie of cookies) {
+                cookie = cookie.trim();
+                if (cookie.startsWith(name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    document.getElementById('formLogin').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const correo = e.target.correo.value;
+        const contraseña = e.target.contraseña.value;
+
+        const res = await fetch('/login/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({ correo, contraseña })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+            window.location.href = '/inicio/';
+        } else {
+            document.getElementById('loginError').innerText = data.error || 'Error al iniciar sesión';
+        }
+    });
+</script>
+
+<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+<script src="{% static 'vendor/tilt/tilt.jquery.min.js' %}"></script>
+<script>
+    $('.js-tilt').tilt({ scale: 1.1 });
+</script>
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>

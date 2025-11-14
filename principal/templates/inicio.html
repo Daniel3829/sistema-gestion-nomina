@@ -1,0 +1,199 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel principal | TecNómina</title>
+	<link rel="shortcut icon" href="{% static 'images/logo_pestana.png' %}">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+	
+
+    <style>
+        body {
+            background: #eef2f7;
+            font-family: 'Poppins', sans-serif;
+            color: black;
+        }
+        /* Navbar */
+        .navbar { 
+            padding: 0.8rem 1rem;
+			border-bottom: 3px solid #1d926f;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .navbar-brand img {
+            width: 170px;
+        }
+
+        .navbar .user-info {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .navbar .user-info span {
+            color: black;
+            font-weight: 500;
+        }
+
+        .logout-btn {
+            background: #ff4d4d;
+            border: none;
+            border-radius: 50px;
+            padding: 6px 14px;
+            color: #fff;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #e63946;
+            transform: translateY(-2px);
+        }
+		
+        /* Dashboard */
+        .dashboard-container {
+            max-width: 1100px;
+            margin: 80px auto;
+            text-align: center;
+        }
+
+        .dashboard-container h2 {
+            color: black;
+        }
+		.text_secondary{
+			color: black;
+		}
+        .card-dashboard {
+            border: none;
+            border-radius: 1rem;
+            background: #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-dashboard:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .card-icon {
+            font-size: 2.7rem;
+            color: #1d926f;
+        }
+
+        .card-body-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            font-size: 0.9rem;
+            color: black;
+        }
+
+        /* Igualar altura de las cards */
+        .row.equal-height {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .row.equal-height > [class*='col-'] {
+            display: flex;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                margin-top: 40px;
+            }
+        }
+		
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar superior -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand" href="#"><img src="{% static 'images/TecNomina1.png' %}" alt=""></a>
+
+            <div class="user-info">
+                <img src="{% static 'images/user.png' %}" alt="user" width="40" class="rounded-circle">
+                <span>{{ request.session.empresa_nombre }}</span>
+                <a href="{% url 'logout' %}">
+                    <button class="logout-btn">
+                        <i class="bi bi-box-arrow-right"></i> Salir
+                    </button>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenedor principal -->
+    <div class="dashboard-container container">
+        <h2 class="mb-3 fw-semibold">Panel de control</h2>
+        <p class="mb-5">Selecciona una de las siguientes opciones para gestionar la nómina de tus empleados</p>
+
+        <div class="row g-4 justify-content-center equal-height">
+            <div class="col-md-6 col-lg-3 d-flex">
+                <div class="card card-dashboard p-4 w-100" onclick="window.location.href='{% url 'registrar_empleado' %}'">
+                    <div class="card-body-content">
+                        <i class="bi bi-person-plus-fill card-icon mb-3"></i>
+                        <h5 class="fw-bold">Registrar empleados</h5>
+                        <p class="text-muted small">Agrega nuevos empleados a la base de datos</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 d-flex">
+                <div class="card card-dashboard p-4 w-100" onclick="window.location.href='{% url 'buscar_empleado' %}'">
+                    <div class="card-body-content">
+                        <i class="bi bi-search card-icon mb-3"></i>
+                        <h5 class="fw-bold">Buscar empleados</h5>
+                        <p class="text-muted small">Consulta y edita información de empleados</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 d-flex">
+                <div class="card card-dashboard p-4 w-100" onclick="window.location.href='{% url 'reportes' %}'">
+                    <div class="card-body-content">
+                        <i class="bi bi-bar-chart-line-fill card-icon mb-3"></i>
+                        <h5 class="fw-bold">Reportes</h5>
+                        <p class="text-muted small">Genera reportes y estadísticas</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 d-flex">
+                <div class="card card-dashboard p-4 w-100" onclick="window.location.href='{% url 'configuracion' %}'">
+                    <div class="card-body-content">
+                        <i class="bi bi-gear-fill card-icon mb-3"></i>
+                        <h5 class="fw-bold">Configuración</h5>
+                        <p class="text-muted small">Personaliza los parámetros del sistema</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer mt-5">
+            © 2025 <strong>TecNómina</strong> — Sistema de gestión de nómina
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

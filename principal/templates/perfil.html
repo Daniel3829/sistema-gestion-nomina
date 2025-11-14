@@ -1,0 +1,523 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil del Empleado | TecNómina</title>
+    <link rel="shortcut icon" href="{% static 'images/logo_pestana.png' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Recursos -->
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #f0fdf4, #fbf9f9);
+            font-family: 'Afacad Flux', sans-serif;
+            min-height: 335vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .perfil-card {
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 40px;
+            max-width: 750px;
+            width: 100%;
+            animation: fadeIn 0.7s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .foto-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .foto-perfil {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #1d926f;
+            transition: transform 0.3s;
+        }
+
+        .foto-perfil:hover {
+            transform: scale(1.05);
+        }
+
+        .nombre-perfil {
+            font-size: 26px;
+            font-weight: 700;
+            color: #333;
+            margin-top: 15px;
+        }
+
+        .cargo-perfil {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .empleado-campo {
+            margin-top: 15px;
+        }
+
+        .empleado-campo label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .empleado-campo span {
+            display: block;
+            color: #444;
+            font-size: 15px;
+            padding: 5px 0;
+        }
+
+        input.form-control {
+            display: none;
+            border-radius: 10px;
+        }
+
+        .botones {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .login100-form-btn {
+            background: #1d926f;
+            color: #fff;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 10px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .login100-form-btn:hover {
+            background: #1a6479;
+        }
+
+        .btn-secundario {
+            background: #ddd;
+            color: #333;
+        }
+
+        .btn-secundario:hover {
+            background: #ccc;
+			color: #1a6479;
+        }
+		.card {
+			border: none;
+			background: #fff;
+		}
+		label {
+			color: #555;
+		}
+		.form-control {
+			border: none;
+			box-shadow: none;
+		}
+		.text-primary {
+			color: #2c3e50 !important;
+		}
+		.text-success {
+			color: #27ae60 !important;
+		}
+		.empleado-campo input{
+			background-color: #eee;
+		}
+    </style>
+</head>
+
+<body>
+<div class="perfil-card text-center">
+
+    <!-- Foto de perfil -->
+    <div class="foto-container">
+        {% if empleado.imagen %}
+            <img src="{{ empleado.imagen.url }}" alt="Foto empleado" class="foto-perfil">
+        {% else %}
+            <img src="{% static 'images/user.png' %}" alt="Foto empleado" class="foto-perfil">
+        {% endif %}
+    </div>
+
+    <h2 class="nombre-perfil">{{ empleado.nombres }} {{ empleado.apellidos }}</h2>
+    <p class="cargo-perfil">{{ empleado.cargo }}</p>
+
+    <!-- Formulario -->
+    <form id="formPerfil" method="POST" enctype="multipart/form-data" class="text-start mt-4">
+        {% csrf_token %}
+
+        <div class="empleado-campo">
+            <label>Nombres:</label>
+            <span class="texto">{{ empleado.nombres }}</span>
+            <input class="form-control" type="text" name="nombres" value="{{ empleado.nombres }}">
+        </div>
+
+        <div class="empleado-campo">
+            <label>Apellidos:</label>
+            <span class="texto">{{ empleado.apellidos }}</span>
+            <input class="form-control" type="text" name="apellidos" value="{{ empleado.apellidos }}">
+        </div>
+
+        <div class="empleado-campo">
+            <label>Correo:</label>
+            <span class="texto">{{ empleado.correo }}</span>
+            <input class="form-control" type="email" name="correo" value="{{ empleado.correo }}">
+        </div>
+
+        <div class="empleado-campo">
+            <label>Cargo:</label>
+            <span class="texto">{{ empleado.cargo }}</span>
+            <input class="form-control" type="text" name="cargo" value="{{ empleado.cargo }}">
+        </div>
+
+        <div class="empleado-campo">
+            <label>Sede:</label>
+            <span class="texto">{{ empleado.sede }}</span>
+            <input class="form-control" type="text" name="sede" value="{{ empleado.sede }}">
+        </div>
+
+        <div class="empleado-campo">
+            <label>Actualizar foto:</label>
+            <input type="file" name="imagen" accept="image/*" class="form-control">
+        </div>
+
+		<div class="card mt-4 p-3">
+			<h3 class="text-center mb-3">Nómina del Empleado</h3>
+
+			<div class="empleado-campo">
+				<label>Salario básico:</label>
+				<span class="texto" id="salario_base_span">{{ empleado.salario_basico|floatformat:2 }}</span>
+				<!-- no editable -->
+			</div>
+
+			<!-- Horas extras diurnas -->
+			<div class="empleado-campo">
+				<label>Horas extras diurnas:</label>
+				<span class="texto" id="horas_extras_diurnas_span">{{ empleado.horas_extra_diurna }}</span>
+				<input type="number" id="horas_extras_diurnas" name="horas_extra_diurna"
+					value="{{ empleado.horas_extra_diurna }}" min="0" step="0.01" class="form-control" style="display:none;">
+				<small class="form-text text-muted">Valor calculado: <span id="valor_horas_diurnas">$0</span></small>
+			</div>
+
+			<!-- Horas extras nocturnas -->
+			<div class="empleado-campo">
+				<label>Horas extras nocturnas:</label>
+				<span class="texto" id="horas_extras_nocturnas_span">{{ empleado.horas_extra_nocturna }}</span>
+				<input type="number" id="horas_extras_nocturnas" name="horas_extra_nocturna"
+					value="{{ empleado.horas_extra_nocturna }}" min="0" step="0.01" class="form-control" style="display:none;">
+				<small class="form-text text-muted">Valor calculado: <span id="valor_horas_nocturnas">$0</span></small>
+			</div>
+
+			<!-- Horas extras festivas -->
+			<div class="empleado-campo">
+				<label>Horas extras festivas:</label>
+				<span class="texto" id="horas_extras_festiva_span">{{ empleado.horas_extra_festiva }}</span>
+				<input type="number" id="horas_extras_festiva" name="horas_extra_festiva"
+					value="{{ empleado.horas_extra_festiva }}" min="0" step="0.01" class="form-control" style="display:none;">
+				<small class="form-text text-muted">Valor calculado: <span id="valor_horas_festivas">$0</span></small>
+			</div>
+
+			<div class="row mb-3">
+				<div class="col-md-6 empleado-campo">
+					<label>Bonificaciones:</label>
+					<span class="texto" id="bonificaciones_span">{{ empleado.bonificaciones }}</span>
+					<input type="number" id="bonificaciones_input" name="bonificaciones"
+						value="{{ empleado.bonificaciones }}" min="0" step="1000" class="form-control" style="display:none;">
+				</div>
+				<div class="col-md-6 empleado-campo">
+					<label>Descuentos adicionales:</label>
+					<span class="texto" id="descuentos_span">{{ empleado.descuentos }}</span>
+					<input type="number" id="descuentos_input" name="descuentos"
+						value="{{ empleado.descuentos }}" min="0" step="1000" class="form-control" style="display:none;">
+				</div>
+			</div>
+
+			<hr>
+
+			<div class="empleado-campo">
+				<label>EPS (4%):</label>
+				<span class="texto" id="valor_eps_span">$0</span>
+				<span style="display:none" id="valor_eps_input">$0</span>
+			</div>
+
+			<div class="empleado-campo">
+				<label>Pensión (4%):</label>
+				<span class="texto" id="valor_pension_span">$0</span>
+			</div>
+
+			<div class="empleado-campo">
+				<label>Auxilio de transporte (si aplica):</label>
+				<span class="texto" id="valor_auxilio_span">$0</span>
+			</div>
+
+			<div class="empleado-campo mt-3">
+				<label><strong>Total deducciones:</strong></label>
+				<span id="total_deducciones" class="text-danger">$0</span>
+			</div>
+
+			<div class="empleado-campo">
+				<label><strong>Salario neto a pagar:</strong></label>
+				<span id="salario_neto" class="text-success fw-bold">$0</span>
+			</div>
+		</div>
+
+		<div class="card shadow-sm mt-4">
+			<div class="card-header bg-primary text-white fw-bold text-center">
+				Resumen de Nómina
+			</div>
+			<div class="card-body p-0">
+				<table class="table table-striped align-middle text-center mb-0">
+					<tbody>
+						<tr class="table-light">
+							<th>Salario Básico</th>
+							<td id="resumen_salario_basico">$0</td>
+						</tr>
+						<tr>
+							<th>Total Horas Extras</th>
+							<td id="resumen_total_extras">$0</td>
+						</tr>
+						<tr>
+							<th>Bonificaciones</th>
+							<td id="resumen_bonificaciones">$0</td>
+						</tr>
+						<tr>
+							<th>Total Bruto</th>
+							<td id="resumen_total_bruto">$0</td>
+						</tr>
+						<tr class="table-light">
+							<th>EPS (4%)</th>
+							<td id="resumen_eps">$0</td>
+						</tr>
+						<tr>
+							<th>Pensión (4%)</th>
+							<td id="resumen_pension">$0</td>
+						</tr>
+						<tr>
+							<th>Fondo Solidaridad (1%)</th>
+							<td id="resumen_fondo">$0</td>
+						</tr>
+						<tr>
+							<th>Descuentos</th>
+							<td id="resumen_descuentos">$0</td>
+						</tr>
+						<tr class="table-secondary fw-bold">
+							<th>Total Deducciones</th>
+							<td id="resumen_deducciones">$0</td>
+						</tr>
+						<tr class="table-success fw-bold text-dark">
+							<th>Auxilio de Transporte</th>
+							<td id="resumen_auxilio">$0</td>
+						</tr>
+						<tr class="table-primary fw-bold fs-5">
+							<th>Salario Neto a Pagar</th>
+							<td id="resumen_neto">$0</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<input type="hidden" id="salario_total" name="salario_total">
+
+
+
+
+        <div class="botones">
+            <button type="button" id="btnEditar" class="login100-form-btn">Editar</button>
+            <button type="submit" id="btnGuardar" class="login100-form-btn" style="display:none;">Guardar</button>
+            <a href="{% url 'buscar_empleado' %}" class="login100-form-btn btn-secundario">Volver</a>
+        </div>
+
+    </form>
+</div>
+
+<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<script>
+const btnEditar = document.getElementById('btnEditar');
+const btnGuardar = document.getElementById('btnGuardar');
+const campos = document.querySelectorAll('.empleado-campo');
+
+// Formato moneda para mostrar en la UI
+function formatoMoneda(valor) {
+    return valor.toLocaleString('es-CO', { style: 'currency', currency: 'COP' });
+}
+
+// Alternar modo edición/vista
+function mostrarModoEdicion(on) {
+    campos.forEach(campo => {
+        const span = campo.querySelector('.texto');
+        const input = campo.querySelector('input');
+        if (span) span.style.display = on ? 'none' : 'block';
+        if (input) input.style.display = on ? 'block' : 'none';
+    });
+
+    btnEditar.style.display = on ? 'none' : 'inline-block';
+    btnGuardar.style.display = on ? 'inline-block' : 'none';
+    actualizarSalario();
+}
+
+// Inicial: modo vista
+mostrarModoEdicion(false);
+
+// Toggle editar
+btnEditar.addEventListener('click', () => mostrarModoEdicion(true));
+
+// Guardar con fetch
+btnGuardar.addEventListener('click', async (event) => {
+    event.preventDefault();
+    const form = document.getElementById('formPerfil');
+    const formData = new FormData(form);
+
+    // Recalcular antes de enviar
+    actualizarSalario();
+
+    // Tomar valor puro del hidden input
+    const salarioNeto = parseFloat(document.getElementById('salario_total').value);
+    formData.set('salario_total', salarioNeto.toFixed(2));
+
+    try {
+        const response = await fetch("{% url 'perfil_empleado' empleado.numero_documento %}", {
+            method: "POST",
+            headers: { 'X-CSRFToken': '{{ csrf_token }}' },
+            body: formData
+        });
+
+        if (!response.ok) throw new Error("Error al actualizar los datos");
+
+        // Actualizar spans con los nuevos valores del input
+        campos.forEach(campo => {
+            const span = campo.querySelector('.texto');
+            const input = campo.querySelector('input');
+            if (span && input) span.textContent = input.value;
+        });
+
+        mostrarModoEdicion(false);
+        alert("✅ Datos actualizados correctamente");
+
+    } catch (error) {
+        alert("❌ Error al actualizar los datos: " + error);
+    }
+});
+
+/* ---------------------------------------------------------
+   Cálculo automático de horas, bonificaciones y deducciones
+   --------------------------------------------------------- */
+function actualizarSalario() {
+    // Validar inputs
+    document.querySelectorAll('input[type="number"]').forEach(inp => {
+        if (inp.value < 0) inp.value = 0;
+    });
+
+    // Función para obtener valor numérico de input o span
+    const getNumber = (idInput, idSpan) => {
+        const inp = document.getElementById(idInput);
+        if (inp) return parseFloat(inp.value) || 0;
+        const sp = document.getElementById(idSpan);
+        return sp ? parseFloat(sp.textContent.replace(/[^0-9.-]+/g,'')) || 0 : 0;
+    };
+
+	const salarioBaseSpan = document.getElementById('salario_base_span');
+	const salarioBase = salarioBaseSpan 
+    ? parseFloat(
+        salarioBaseSpan.textContent
+            .trim()
+            .replace(/\./g, '')      // quitar puntos de miles
+            .replace(',', '.')       // convertir coma decimal a punto
+    ) || 0 
+    : 0;
+
+    const horasExtrasDiurnas = getNumber('horas_extras_diurnas', 'horas_extras_diurnas_span');
+    const horasExtrasNocturnas = getNumber('horas_extras_nocturnas', 'horas_extras_nocturnas_span');
+    const horasExtrasFestivas = getNumber('horas_extras_festiva', 'horas_extras_festiva_span');
+    const bonificaciones = getNumber('bonificaciones_input', 'bonificaciones_span');
+    const descuentos = getNumber('descuentos_input', 'descuentos_span');
+
+    const SMMLV = 1423500;        
+    const AUXILIO_TRANSPORTE = 200000;
+    const UMBRAL_2_SMMLV = SMMLV * 2;
+    const UMBRAL_4_SMMLV = SMMLV * 4;
+
+    const valorHora = salarioBase / 240;
+    const valorHorasDiurnas = horasExtrasDiurnas * valorHora * 1.25;
+    const valorHorasNocturnas = horasExtrasNocturnas * valorHora * 1.75;
+    const valorHorasFestivas = horasExtrasFestivas * valorHora * 2.0;
+    const totalHorasExtras = valorHorasDiurnas + valorHorasNocturnas + valorHorasFestivas;
+
+    const totalBruto = salarioBase + totalHorasExtras + bonificaciones;
+
+    // Deducciones
+    const eps = totalBruto * 0.04;
+    const pension = totalBruto * 0.04;
+    const fondoSolidaridad = salarioBase > UMBRAL_4_SMMLV ? salarioBase * 0.01 : 0;
+    const auxilioTransporte = salarioBase <= UMBRAL_2_SMMLV ? AUXILIO_TRANSPORTE : 0;
+
+    const totalDeducciones = eps + pension + fondoSolidaridad + descuentos;
+    const salarioNeto = totalBruto + auxilioTransporte - totalDeducciones;
+
+    // Función para actualizar UI
+    const setText = (id, valor) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = formatoMoneda(valor);
+    };
+
+    setText('valor_horas_diurnas', valorHorasDiurnas);
+    setText('valor_horas_nocturnas', valorHorasNocturnas);
+    setText('valor_horas_festivas', valorHorasFestivas);
+    setText('valor_eps_span', eps);
+    setText('valor_pension_span', pension);
+    setText('valor_auxilio_span', auxilioTransporte);
+    setText('total_deducciones', totalDeducciones);
+    setText('salario_neto', salarioNeto);
+    setText('resumen_salario_basico', salarioBase);
+    setText('resumen_total_extras', totalHorasExtras);
+    setText('resumen_bonificaciones', bonificaciones);
+    setText('resumen_total_bruto', totalBruto);
+    setText('resumen_eps', eps);
+    setText('resumen_pension', pension);
+    setText('resumen_fondo', fondoSolidaridad);
+    setText('resumen_descuentos', descuentos);
+    setText('resumen_deducciones', totalDeducciones);
+    setText('resumen_auxilio', auxilioTransporte);
+    setText('resumen_neto', salarioNeto);
+
+    // Guardar valor puro para Django
+    const hiddenInput = document.getElementById('salario_total');
+    if (hiddenInput) hiddenInput.value = salarioNeto.toFixed(2);
+}
+
+// Resaltar un campo temporalmente
+function resaltarCampo(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.add('bg-warning-subtle');
+    setTimeout(() => el.classList.remove('bg-warning-subtle'), 600);
+}
+
+// Ejecutar al cargar y al cambiar inputs
+document.addEventListener('DOMContentLoaded', () => {
+    actualizarSalario();
+    resaltarCampo('resumen_neto');
+});
+
+document.querySelectorAll('#horas_extras_diurnas, #horas_extras_nocturnas, #horas_extras_festiva, #bonificaciones_input, #descuentos_input')
+    .forEach(input => input.addEventListener('input', actualizarSalario));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,245 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
+	
+	<title>Contactanos | TecNómina</title>
+
+	<link rel="shortcut icon" href="{% static 'images/logo_pestana.png' %}">
+	
+	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap1.min.css' %}">
+	<link rel="stylesheet" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+
+	<!-- Custom styles for our template -->
+	<link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap-theme.css' %}" media="screen" >
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="assets/js/html5shiv.js"></script>
+	<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<!-- Fixed navbar -->
+	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
+		<div class="container">
+			<div class="navbar-header">
+				<!-- Button for smallest screens -->
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+				<a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'images/TecNomina1.png' %}" alt="Progressus HTML5 template" style="height: 45px; width: auto; margin-right: 100px;"></a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav pull-right">
+					<li class="active"><a href="{% url 'index' %}">Inicio</a></li>
+					<li><a href="{% url 'about' %}">Nosotros</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Servicios <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="{% url 'sidebar_left' %}">Cálculo de Nómina</a></li>
+							<li class="active"><a href="{% url 'sidebar_right' %}">Gestión de Empleados</a></li>
+						</ul>
+					</li>
+					<li><a href="{% url 'contact' %}">Contacto</a></li>
+					<li><a class="btn" href="{% url 'login' %}">Iniciar sesión / Registrarse</a></li>
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div>
+	</div> 
+	<!-- /.navbar -->
+
+	<header id="head" class="secondary"></header>
+
+	<!-- container -->
+	<div class="container">
+
+		<ol class="breadcrumb">
+			<li><a href="index.html">Inicio</a></li>
+			<li class="active">Contacto</li>
+		</ol>
+
+		<div class="row">
+			
+			<!-- Article main content -->
+			<article class="col-sm-9 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">Contáctanos</h1>
+				</header>
+
+				<p class="lead">
+					En <strong>TecNomina</strong> creemos en la comunicación clara y cercana. 
+					Si tienes dudas, sugerencias o simplemente quieres saber más sobre nuestros servicios, 
+					estaremos felices de escucharte.
+				</p>
+
+				<div class="contact-info">
+					<div class="contact-card">
+					<i class="fa fa-envelope"></i>
+					<h4>Correo electrónico</h4>
+					<p><a href="mailto:contacto@tecnomina.com">contacto@tecnomina.com</a></p>
+					</div>
+
+					<div class="contact-card">
+					<i class="fa fa-whatsapp"></i>
+					<h4>WhatsApp</h4>
+					<p><a href="https://wa.me/573204567890" target="_blank">(+57) 320 456 7890</a></p>
+					</div>
+
+					<div class="contact-card">
+					<i class="fa fa-clock-o"></i>
+					<h4>Horario de atención</h4>
+					<p>Lunes a Viernes<br>8:00 a.m. – 6:00 p.m.</p>
+					</div>
+				</div>
+
+				<section class="about-team">
+					<h3>Nuestro compromiso</h3>
+					<p>
+					Queremos que cada empresa y cada usuario confíe en nosotros como su aliado digital. 
+					Nuestro equipo está formado por profesionales comprometidos con hacer de la gestión de nómina 
+					un proceso ágil, seguro y accesible para todos.
+					</p>
+					<p>
+					Si necesitas soporte técnico, asesoría o una demostración personalizada, 
+					no dudes en escribirnos. ¡Estamos aquí para ayudarte!
+					</p>
+				</section>
+			</article>
+			<!-- /Article -->
+			
+			<!-- Sidebar -->
+			<aside class="col-sm-3 sidebar sidebar-right">
+
+				<div class="widget">
+					<h4>Atención personalizada</h4>
+					<p>
+					Nuestro equipo está disponible para resolver tus inquietudes y guiarte en cada paso.  
+					Si necesitas soporte técnico o asesoría sobre nómina, estamos aquí para ayudarte.
+					</p>
+				</div>
+
+				<div class="widget">
+					<h4>Canales de ayuda</h4>
+					<ul>
+					<li><i class="fa fa-envelope"></i> <a href="mailto:soporte@tecnomina.com">soporte@tecnomina.com</a></li>
+					<li><i class="fa fa-phone"></i> (+57) 320 456 7890</li>
+					<li><i class="fa fa-whatsapp"></i> WhatsApp disponible de 8:00 a.m. a 6:00 p.m.</li>
+					</ul>
+				</div>
+
+				<div class="widget">
+					<h4>Consejo rápido</h4>
+					<p>
+					¿Sabías que puedes automatizar tus cálculos de nómina con nuestro módulo de gestión?  
+					Ahorra tiempo y evita errores con un sistema hecho para ti.
+					</p>
+					<p><a href="sidebar-left.html" class="btn btn-action btn-sm">Ver funcionalidades</a></p>
+				</div>
+
+			</aside>
+
+			<!-- /Sidebar -->
+
+		</div>
+	</div>	<!-- /container -->
+
+	<footer id="footer" class="top-space">
+
+		<div class="footer1">
+			<div class="container">
+				<div class="row">
+					
+					<div class="col-md-3 widget">
+						<h3 class="widget-title">Contactanos</h3>
+						<div class="widget-body">
+							<p>+57 000 195 3568<br>
+								<a href="mailto:#">TecNomina@gmail.com</a><br>
+								<br>
+								Facatativa, Cundinamarca. Colombia
+							</p>	
+						</div>
+					</div>
+
+					<div class="col-md-3 widget">
+						<h3 class="widget-title">Siguenos</h3>
+						<div class="widget-body">
+							<p class="follow-me-icons">
+								<a href=""><i class="fa fa-twitter fa-2"></i></a>
+								<a href=""><i class="fa fa-dribbble fa-2"></i></a>
+								<a href=""><i class="fa fa-github fa-2"></i></a>
+								<a href=""><i class="fa fa-facebook fa-2"></i></a>
+							</p>	
+						</div>
+					</div>
+
+					<div class="col-md-6 widget">
+						<h3 class="widget-title">Sobre TecNómina</h3>
+						<div class="widget-body">
+							<p>
+								En <strong>TecNómina</strong> trabajamos para ofrecerte una herramienta confiable y moderna para la gestión de nómina. 
+      							Nuestro objetivo es simplificar los procesos administrativos y brindar soluciones digitales eficientes para empresas y emprendedores.
+							</p>
+							<p> 
+								Creamos tecnología que impulsa la productividad y mejora la experiencia de los usuarios. ¡La innovación es parte de nuestro ADN!
+							</p>
+						</div>
+					</div>
+
+				</div> <!-- /row of widgets -->
+			</div>
+		</div>
+
+		<div class="footer2">
+			<div class="container">
+				<div class="row">
+					
+					<div class="col-md-6 widget">
+						<div class="widget-body">
+							<p class="simplenav">
+								<a href="#">Inicio</a> | 
+								<a href="about.html">Nosotros</a> |
+								<a href="sidebar-right.html">Servicios</a> |
+								<a href="contact.html">Contacto</a> |
+								<b><a href="signup.html">Inicio de sesión</a></b>
+							</p>
+						</div>
+					</div>
+
+					<div class="col-md-6 widget">
+						<div class="widget-body">
+							<p class="text-right">
+								Copyright &copy; 2025, TecNomina. Designed by <a href="http://gettemplate.com/" rel="designer">gettemplate</a> 
+							</p>
+						</div>
+					</div>
+
+				</div> <!-- /row of widgets -->
+			</div>
+		</div>
+
+	</footer>	
+		
+
+
+
+
+	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script src="{% static 'js/headroom.min.js' %}"></script>
+	<script src="{% static 'js/jQuery.headroom.min.js' %}"></script>
+	<script src="{% static 'js/template.js' %}"></script>
+	
+	<!-- Google Maps -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=&amp;sensor=false&amp;extension=.js"></script> 
+	<script src="{% static 'js/google-map.js' %}"></script>
+	
+
+</body>
+</html>

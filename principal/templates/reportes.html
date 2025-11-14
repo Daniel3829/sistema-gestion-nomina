@@ -1,0 +1,252 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reportes | TecNomina</title>
+	<link rel="shortcut icon" href="{% static 'images/logo_pestana.png' %}">
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <style>
+        body {
+            background-color: #f8f9fc;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Header */
+        .navbar { 
+            padding: 0.8rem 1rem;
+            border-bottom: 3px solid #1d926f;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .navbar-brand img{
+            width: 170px;
+        }
+
+        .navbar .user-info {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .navbar .user-info span {
+            color: #000;
+            font-weight: 500;
+        }
+
+        /* Info Cards */
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 70px;
+        }
+
+        .card-info {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .card-info h6 {
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .card-info h3 {
+            font-size: 26px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .card-info p {
+            font-size: 13px;
+            color: #1d926f;
+        }
+
+        /* Content area */
+        .content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .table-section, .worker-section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+
+        th, td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+
+        td:first-child {
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        /* Workers list */
+        .worker {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .worker img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 12px;
+            object-fit: cover;
+        }
+
+        .worker small {
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+
+        /* Buttons */
+        .btn-reportes {
+            background-color: #1d926f;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 25px;
+            font-weight: 500;
+            transition: 0.2s ease;
+            margin: 20px;
+            width: 250px;
+        }
+
+        .btn-reportes:hover {
+            background-color: #1a6479;
+        }
+
+        @media (max-width: 992px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand" href="#"><img src="{% static 'images/TecNomina1.png' %}" alt=""></a>
+            <div class="user-info">
+                <img src="{% static 'images/user.png' %}" alt="user" width="40" class="rounded-circle">
+                <span>{{ request.session.empresa_nombre }}</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Info Cards -->
+        <div class="info-cards">
+            <div class="card-info">
+                <h6>Valor de nómina</h6>
+                <h3>${{ total_nomina|floatformat:2 }}</h3>
+                <p>Valor total acumulado</p>
+            </div>
+
+            <div class="card-info">
+                <h6>Cantidad de empleados</h6>
+                <h3>{{ total_empleados }}</h3>
+                <p>Total registrados</p>
+            </div>
+
+            <div class="card-info">
+                <h6>Sedes</h6>
+                <h3>{{ total_sedes }}</h3>
+                <p>Sedes activas</p>
+            </div>
+        </div>
+
+        <!-- Data section -->
+        <div class="content">
+            <!-- Tabla -->
+            <div class="table-section">
+                <h5>Datos de nómina</h5>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Salario total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for empleado in empleados %}
+                        <tr>
+                            <td>{{ empleado.nombres }} {{ empleado.apellidos }}</td>
+                            <td>
+                                {% if empleado.salario_total %}
+                                    ${{ empleado.salario_total|floatformat:2 }}
+                                {% else %}
+                                    $0.00
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="2">No hay empleados registrados.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Trabajadores -->
+            <div class="worker-section">
+                <h5>Trabajadores</h5>
+                {% for empleado in empleados %}
+                <div class="worker">
+                    {% if empleado.imagen %}
+                        <img src="{{ empleado.imagen.url }}" alt="Foto">
+                    {% else %}
+                        <img src="{% static 'images/user.png' %}" alt="Foto">
+                    {% endif %}
+                    <div>
+                        <strong>{{ empleado.nombres }} {{ empleado.apellidos }}</strong><br>
+                        <small>C.C. {{ empleado.numero_documento }}</small>
+                    </div>
+                </div>
+                {% empty %}
+                <p>No hay trabajadores registrados.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="d-flex justify-content-center mt-4 gap-4">
+            <!-- Botón para ir a reportes_descarga.html -->
+            <button class="btn-reportes" type="button" onclick="window.location.href='{% url 'reportes_descarga' %}'">
+                Generar Reportes
+            </button>
+
+            <!-- Botón de volver -->
+            <button class="btn-reportes" type="button" id="btnVolver" onclick="window.location.href='{% url 'inicio' %}'">
+                Volver
+            </button>
+        </div>
+    </div>
+
+</body>
+</html>

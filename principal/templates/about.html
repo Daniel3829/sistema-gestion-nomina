@@ -1,0 +1,237 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
+	
+	<title>Sobre nosotros | TecNómina</title>
+
+	<link rel="shortcut icon" href="{% static 'images/logo_pestana.png' %}">
+	
+	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap1.min.css' %}">
+	<link rel="stylesheet" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+
+	<!-- Custom styles for our template -->
+	<link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap-theme.css' %}" media="screen" >
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="assets/js/html5shiv.js"></script>
+	<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<!-- Fixed navbar -->
+	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
+		<div class="container">
+			<div class="navbar-header">
+				<!-- Button for smallest screens -->
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+				<a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'images/TecNomina1.png' %}" alt="Progressus HTML5 template" style="height: 45px; width: auto; margin-right: 100px;"></a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav pull-right">
+					<li class="active"><a href="{% url 'index' %}">Inicio</a></li>
+					<li><a href="{% url 'about' %}">Nosotros</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Servicios <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="{% url 'sidebar_left' %}">Cálculo de Nómina</a></li>
+							<li class="active"><a href="{% url 'sidebar_right' %}">Gestión de Empleados</a></li>
+						</ul>
+					</li>
+					<li><a href="{% url 'contact' %}">Contacto</a></li>
+					<li><a class="btn" href="{% url 'login' %}">Iniciar sesión / Registrarse</a></li>
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div>
+	</div> 
+	<!-- /.navbar -->
+
+	<header id="head" class="secondary"></header>
+
+	<!-- container -->
+	<div class="container">
+
+		<ol class="breadcrumb">
+			<li><a href="index.html">Inicio</a></li>
+			<li class="active">Nosotros</li>
+		</ol>
+
+		<div class="row">
+			
+			<!-- Article main content -->
+			<article class="col-sm-8 maincontent" style="background:#fff; border-radius:15px; padding:40px 50px; box-shadow:0 4px 16px rgba(0,0,0,0.06); transition:all 0.3s ease;">
+				<header class="page-header" style="margin-bottom:30px; text-align:center;">
+					<h1 class="page-title" style="font-weight:700; color:#007bff; font-size:2.3rem;">Sobre Nosotros</h1>
+					<hr style="width:80px; border:2px solid #007bff; margin:auto; border-radius:3px;">
+				</header>
+
+				<section style="margin-bottom:30px;">
+					<h3 style="color:#333; font-weight:600;">¿Quiénes Somos?</h3>
+					<p style="color:#555; line-height:1.8; font-size:1.5rem;">
+						<strong style="color:#007bff;">TecNómina</strong> es una iniciativa creada por jóvenes apasionados por la tecnología y la innovación. 
+						Nuestro objetivo es ofrecer soluciones digitales que simplifiquen la gestión de nómina y procesos administrativos 
+						en empresas, instituciones y emprendimientos. Creemos que la automatización puede ser simple, segura y accesible para todos.
+					</p>
+					<p style="color:#555; line-height:1.8; font-size:1.5rem;">
+						Nacimos con la visión de modernizar la forma en que se manejan los datos laborales y contables, 
+						integrando herramientas que hagan el trabajo más rápido, eficiente y confiable.
+					</p>
+				</section>
+
+				<section style="margin-bottom:30px;">
+					<h3 style="color:#333; font-weight:600;">Nuestra Misión</h3>
+					<p style="color:#555; line-height:1.8; font-size:1.5rem;">
+						Desarrollar plataformas tecnológicas que optimicen la administración del talento humano, 
+						garantizando precisión en los cálculos, facilidad de uso y una experiencia intuitiva para cada usuario.  
+						Buscamos que nuestros sistemas impulsen la productividad y la organización en todo tipo de empresa.
+					</p>
+				</section>
+
+				<section style="margin-bottom:30px;">
+					<h3 style="color:#333; font-weight:600;">Nuestra Visión</h3>
+					<p style="color:#555; line-height:1.8; font-size:1.5rem;">
+						Ser reconocidos como una de las soluciones de software de nómina más confiables y completas del país, 
+						contribuyendo al crecimiento digital de las empresas colombianas y fomentando el uso responsable de la tecnología en los entornos laborales.
+					</p>
+				</section>
+
+				<section>
+					<h3 style="color:#333; font-weight:600;">Valores que nos Inspiran</h3>
+					<p style="color:#555; line-height:1.8; font-size:1.5rem;">
+						En <strong style="color:#007bff;">TecNómina</strong> trabajamos con base en la <strong>innovación</strong>, la <strong>transparencia</strong> y el <strong>compromiso</strong>.  
+						Creemos que cada proyecto debe aportar valor real a las personas y contribuir al desarrollo de comunidades más conectadas y eficientes.  
+						Nuestro equipo combina conocimiento técnico con una fuerte vocación de servicio para ofrecer siempre lo mejor.
+					</p>
+				</section>
+			</article>
+
+			
+			<!-- Sidebar -->
+			<aside class="col-sm-4 sidebar sidebar-right">
+				<div class="widget" 
+					style="background:#fff; border-radius:15px; padding:30px 25px; box-shadow:0 4px 16px rgba(0,0,0,0.06); transition:all 0.3s ease;">
+					
+					<h4 style="color:#007bff; font-weight:700; text-align:center; margin-bottom:20px; font-size:1.8rem;">
+						Comunidad TecNómina
+					</h4>
+
+					<ul class="list-unstyled list-spaces" style="padding-left:0; margin-bottom:0;">
+						<li style="background:#f8f9fa; border-radius:10px; padding:12px 15px; margin-bottom:10px; transition:all 0.3s ease;">
+							<span style="color:#555; font-size:1.2rem;">🎓 Nacimos como un proyecto universitario que busca aplicar el conocimiento en soluciones reales.</span>
+						</li>
+						<li style="background:#f8f9fa; border-radius:10px; padding:12px 15px; margin-bottom:10px;">
+							<span style="color:#555; font-size:1.2rem;">💻 Desarrollamos herramientas digitales enfocadas en la gestión eficiente de nómina y recursos humanos.</span>
+						</li>
+						<li style="background:#f8f9fa; border-radius:10px; padding:12px 15px; margin-bottom:10px;">
+							<span style="color:#555; font-size:1.2rem;">📘 Nuestro objetivo es fomentar la práctica profesional y la innovación dentro del entorno académico.</span>
+						</li>
+						<li style="background:#f8f9fa; border-radius:10px; padding:12px 15px; margin-bottom:10px;">
+							<span style="color:#555; font-size:1.2rem;">🤝 Creemos en el trabajo colaborativo y en el aprendizaje constante a través de la tecnología.</span>
+						</li>
+						<li style="background:#f8f9fa; border-radius:10px; padding:12px 15px;">
+							<span style="color:#555; font-size:1.2rem;">🌟 TecNómina representa el esfuerzo, la creatividad y la dedicación de estudiantes comprometidos con el futuro digital.</span>
+						</li>
+					</ul>
+				</div>
+			</aside>
+			<!-- /Sidebar -->
+
+		</div>
+	</div>	<!-- /container -->
+	
+
+	<footer id="footer" class="top-space">
+
+		<div class="footer1">
+			<div class="container">
+				<div class="row">
+					
+					<div class="col-md-3 widget">
+						<h3 class="widget-title">Contactanos</h3>
+						<div class="widget-body">
+							<p>+57 000 195 3568<br>
+								<a href="mailto:#">TecNomina@gmail.com</a><br>
+								<br>
+								Facatativa, Cundinamarca. Colombia
+							</p>	
+						</div>
+					</div>
+
+					<div class="col-md-3 widget">
+						<h3 class="widget-title">Siguenos</h3>
+						<div class="widget-body">
+							<p class="follow-me-icons">
+								<a href=""><i class="fa fa-twitter fa-2"></i></a>
+								<a href=""><i class="fa fa-dribbble fa-2"></i></a>
+								<a href=""><i class="fa fa-github fa-2"></i></a>
+								<a href=""><i class="fa fa-facebook fa-2"></i></a>
+							</p>	
+						</div>
+					</div>
+
+					<div class="col-md-6 widget">
+						<h3 class="widget-title">Sobre TecNómina</h3>
+						<div class="widget-body">
+							<p>
+								En <strong>TecNómina</strong> trabajamos para ofrecerte una herramienta confiable y moderna para la gestión de nómina. 
+      							Nuestro objetivo es simplificar los procesos administrativos y brindar soluciones digitales eficientes para empresas y emprendedores.
+							</p>
+							<p> 
+								Creamos tecnología que impulsa la productividad y mejora la experiencia de los usuarios. ¡La innovación es parte de nuestro ADN!
+							</p>
+						</div>
+					</div>
+
+				</div> <!-- /row of widgets -->
+			</div>
+		</div>
+
+		<div class="footer2">
+			<div class="container">
+				<div class="row">
+					
+					<div class="col-md-6 widget">
+						<div class="widget-body">
+							<p class="simplenav">
+								<a href="#">Inicio</a> | 
+								<a href="about.html">Nosotros</a> |
+								<a href="sidebar-right.html">Servicios</a> |
+								<a href="contact.html">Contacto</a> |
+								<b><a href="signup.html">Inicio de sesión</a></b>
+							</p>
+						</div>
+					</div>
+
+					<div class="col-md-6 widget">
+						<div class="widget-body">
+							<p class="text-right">
+								Copyright &copy; 2025, TecNomina. Designed by <a href="http://gettemplate.com/" rel="designer">gettemplate</a> 
+							</p>
+						</div>
+					</div>
+
+				</div> <!-- /row of widgets -->
+			</div>
+		</div>
+	</footer>	
+		
+
+
+
+
+	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script src="{% static 'js/headroom.min.js' %}"></script>
+	<script src="{% static 'js/jQuery.headroom.min.js' %}"></script>
+	<script src="{% static 'js/template.js' %}"></script>
+</body>
+</html>

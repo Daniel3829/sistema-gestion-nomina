@@ -1,0 +1,211 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
+	
+	<title>Gestión de Empleados | TecNómina</title>
+
+	<link rel="shortcut icon" href="{% static 'images/logo_pestana.png' %}">
+	
+	<link rel="stylesheet" media="screen" href="{% static 'http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' %}">
+	<link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap1.min.css' %}">
+	<link rel="stylesheet" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+
+	<!-- Custom styles for our template -->
+	<link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap-theme.css' %}" media="screen" >
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	<script src="assets/js/html5shiv.js"></script>
+	<script src="assets/js/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+	<!-- Fixed navbar -->
+	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
+		<div class="container">
+			<div class="navbar-header">
+				<!-- Button for smallest screens -->
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+				<a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'images/TecNomina1.png' %}" alt="Progressus HTML5 template" style="height: 45px; width: auto; margin-right: 100px;"></a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav pull-right">
+					<li class="active"><a href="{% url 'index' %}">Inicio</a></li>
+					<li><a href="{% url 'about' %}">Nosotros</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Servicios <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="{% url 'sidebar_left' %}">Cálculo de Nómina</a></li>
+							<li class="active"><a href="{% url 'sidebar_right' %}">Gestión de Empleados</a></li>
+						</ul>
+					</li>
+					<li><a href="{% url 'contact' %}">Contacto</a></li>
+					<li><a class="btn" href="{% url 'login' %}">Iniciar sesión / Registrarse</a></li>
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div>
+	</div> 
+	<!-- /.navbar -->
+
+	<header id="head" class="secondary"></header>
+
+	<!-- container -->
+	<div class="container">
+
+		<ol class="breadcrumb">
+			<li><a href="index.html">Inicio</a></li>
+			<li class="active">Gestión de Empleados</li>
+		</ol>
+
+		<div class="row">
+			
+			<!-- Article main content -->
+			<article class="col-md-8 maincontent">
+				<header class="page-header">
+					<h1 class="page-title">Gestión de empleados eficiente y sin complicaciones</h1>
+				</header>
+				<p>Con TecNómina puedes administrar fácilmente toda la información de tus empleados en un solo lugar. Desde los datos personales hasta el historial laboral, nuestro sistema te ayuda a mantener un control claro, seguro y actualizado de cada integrante de tu equipo.</p>
+				<p>Organiza contratos, roles y jornadas laborales con solo unos clics. Además, podrás acceder rápidamente a la información necesaria para generar reportes, liquidaciones y aportes, reduciendo errores humanos y optimizando el tiempo del área administrativa.</p>
+				<p>La plataforma está diseñada para adaptarse tanto a pequeñas empresas como a organizaciones en crecimiento. Con una interfaz sencilla y moderna, podrás enfocarte en lo más importante: el bienestar de tu equipo y la productividad de tu empresa.</p>
+
+				<h2>Todo tu equipo bajo control</h2>
+				<p>Registra, edita y gestiona empleados de manera intuitiva. TecNómina permite visualizar la información clave de cada trabajador, su cargo, salario, días laborados, licencias y mucho más. Todo sincronizado con el módulo de cálculo de nómina para una gestión integral.</p>
+				<p>Evita pérdidas de información y confusiones: nuestro sistema mantiene los datos organizados y protegidos, garantizando la trazabilidad y confidencialidad de cada registro.</p>
+
+				<blockquote>“Con TecNómina, llevar el control de empleados dejó de ser una tarea tediosa. Ahora todo está automatizado y al alcance de un clic.”</blockquote>
+				<p>Reduce el trabajo manual y los procesos repetitivos. Gracias a la automatización y a las notificaciones inteligentes, podrás mantener tu base de empleados siempre al día, sin preocuparte por fechas límite o inconsistencias.</p>
+				<p>Ya sea que manejes un equipo pequeño o una nómina completa, TecNómina te ofrece la tranquilidad de contar con una herramienta confiable, moderna y pensada para la gestión laboral de hoy.</p>
+
+				<h2>Gestión moderna, segura y adaptable</h2>
+				<p>Nuestro módulo de gestión de empleados está diseñado para evolucionar contigo. Desde el registro de nuevos colaboradores hasta la generación de reportes personalizados, todo está pensado para hacer tu trabajo más ágil y eficiente.</p>
+
+				<p>Actualiza, consulta y analiza la información de tu personal con total libertad. TecNómina es la herramienta que transforma la gestión administrativa en una experiencia simple, ordenada y 100% digital.</p>
+			</article>
+			<!-- /Article -->
+			
+			<!-- Sidebar -->
+			<aside class="col-md-4 sidebar sidebar-right">
+
+				<div class="row widget sidebar-card">
+					<div class="col-xs-12">
+						<h4><i class="fa fa-users text-primary"></i> Centraliza la información de tu equipo</h4>
+						<p>Administra todos los datos personales, laborales y de contacto de tus empleados desde un solo lugar. Con <strong>TecNómina</strong>, mantén tu empresa organizada y actualizada sin esfuerzo.</p>
+					</div>
+				</div>
+
+				<div class="row widget sidebar-card image-card">
+					<div class="col-xs-12 text-center">
+						<h4><i class="fa fa-bar-chart text-primary"></i> Visualiza y controla cada detalle</h4>
+						<img src="{% static 'images/Imagen 1 sge.jpg' %}" alt="Interfaz TecNómina" class="sidebar-img">
+					</div>
+				</div>
+
+				<div class="row widget sidebar-card image-card">
+					<div class="col-xs-12">
+						<h4><i class="fa fa-briefcase text-primary"></i> Optimiza la administración del talento</h4>
+						<img src="{% static 'images/Imagen 2 sge.jpg' %}" alt="Gestión del talento" class="sidebar-img">
+						<p>Consulta cargos, salarios, asistencias y desempeño en tiempo real. <strong>TecNómina</strong> te ayuda a reducir errores, ahorrar tiempo y fortalecer la gestión de tu equipo.</p>
+					</div>
+				</div>
+
+			</aside>
+			<!-- /Sidebar -->
+		</div>
+	</div>	<!-- /container -->
+	
+
+	<footer id="footer" class="top-space">
+
+		<div class="footer1">
+			<div class="container">
+				<div class="row">
+					
+					<div class="col-md-3 widget">
+						<h3 class="widget-title">Contactanos</h3>
+						<div class="widget-body">
+							<p>+57 000 195 3568<br>
+								<a href="mailto:#">TecNomina@gmail.com</a><br>
+								<br>
+								Facatativa, Cundinamarca. Colombia
+							</p>	
+						</div>
+					</div>
+
+					<div class="col-md-3 widget">
+						<h3 class="widget-title">Siguenos</h3>
+						<div class="widget-body">
+							<p class="follow-me-icons">
+								<a href=""><i class="fa fa-twitter fa-2"></i></a>
+								<a href=""><i class="fa fa-dribbble fa-2"></i></a>
+								<a href=""><i class="fa fa-github fa-2"></i></a>
+								<a href=""><i class="fa fa-facebook fa-2"></i></a>
+							</p>	
+						</div>
+					</div>
+
+					<div class="col-md-6 widget">
+						<h3 class="widget-title">Sobre TecNómina</h3>
+						<div class="widget-body">
+							<p>
+								En <strong>TecNómina</strong> trabajamos para ofrecerte una herramienta confiable y moderna para la gestión de nómina. 
+      							Nuestro objetivo es simplificar los procesos administrativos y brindar soluciones digitales eficientes para empresas y emprendedores.
+							</p>
+							<p> 
+								Creamos tecnología que impulsa la productividad y mejora la experiencia de los usuarios. ¡La innovación es parte de nuestro ADN!
+							</p>
+						</div>
+					</div>
+
+				</div> <!-- /row of widgets -->
+			</div>
+		</div>
+
+		<div class="footer2">
+			<div class="container">
+				<div class="row">
+					
+					<div class="col-md-6 widget">
+						<div class="widget-body">
+							<p class="simplenav">
+								<a href="#">Inicio</a> | 
+								<a href="about.html">Nosotros</a> |
+								<a href="sidebar-right.html">Servicios</a> |
+								<a href="contact.html">Contacto</a> |
+								<b><a href="signup.html">Inicio de sesión</a></b>
+							</p>
+						</div>
+					</div>
+
+					<div class="col-md-6 widget">
+						<div class="widget-body">
+							<p class="text-right">
+								Copyright &copy; 2025, TecNomina. Designed by <a href="http://gettemplate.com/" rel="designer">gettemplate</a> 
+							</p>
+						</div>
+					</div>
+
+				</div> <!-- /row of widgets -->
+			</div>
+		</div>
+
+	</footer>
+		
+
+
+
+
+	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script src="{% static 'js/headroom.min.js' %}"></script>
+	<script src="{% static 'js/jQuery.headroom.min.js' %}"></script>
+	<script src="{% static 'js/template.js' %}"></script>
+</body>
+</html>

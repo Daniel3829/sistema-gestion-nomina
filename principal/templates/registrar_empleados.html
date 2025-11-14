@@ -1,0 +1,438 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title>Registrar empleados | TecNómina</title>
+	<link rel="shortcut icon" href="{% static 'images/logo_pestana.png' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+</head>
+<body>
+	<style>
+        body {
+            background-color: #f5f6fa;
+			
+        }
+
+        .wrap-login100 {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+				.logo-img {
+			display: flex;
+			justify-content: center;
+			margin-bottom: 20px;
+		}
+
+		.logo-img img {
+			width: 400px;
+		}
+		.login100-form-title {
+			color: #1d926f;
+			font-weight: 600;
+			font-size: 1.6rem;
+			margin-bottom: 10px;
+			display: block;
+		}
+		.focus-input100 {
+			display: block;
+			position: absolute;
+			border-radius: 25px;
+			bottom: 0;
+			left: 0;
+			z-index: -1;
+			width: 100%;
+			height: 100%;
+			box-shadow: 0px 0px 0px 0px;
+			color: #1d926f;
+		}
+		.input100:focus + .focus-input100 + .symbol-input100 {
+			color: #1d926f;
+			padding-left: 28px;
+		}
+		.login100-form-btn {
+			font-family: Montserrat-Bold;
+			font-size: 15px;
+			line-height: 1.5;
+			color: #fff;
+			text-transform: uppercase;
+
+			width: 40%;
+			height: 50px;
+			border-radius: 25px;
+			background: #1d926f;
+			display: -webkit-box;
+			display: -webkit-flex;
+			display: -moz-box;
+			display: -ms-flexbox;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 0 25px;
+
+			-webkit-transition: all 0.4s;
+			-o-transition: all 0.4s;
+			-moz-transition: all 0.4s;
+			transition: all 0.4s;
+		}
+
+		.login100-form-btn:hover {
+			background: #1a6479;
+		}
+
+	</style>
+
+<div class="limiter">
+
+    <div class="container-login100">
+        <div class="wrap-login100">
+			<div class="logo-img">
+				<img src="{% static 'images/TecNomina1.png' %}" alt="logo TecNómina">
+			</div>
+
+            <form id="formEmpleado" class="login100-form validate-form" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h2 class="login100-form-title mb-2">Registrar empleados</h2>
+                <p class="login101-form-title mb-4">Introduzca la información de sus empleados</p>
+
+                <!-- Nombres -->
+                <div class="wrap-input100 validate-input mb-2">
+                    <input class="input100" type="text" id="nombres" name="nombres" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ ]+" placeholder="Nombres">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100"><i class="fa fa-user"></i></span>
+                </div>
+
+                <!-- Apellidos -->
+                <div class="wrap-input100 validate-input mb-2">
+                    <input class="input100" type="text" id="apellidos" name="apellidos" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ ]+" placeholder="Apellidos">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100"><i class="fa fa-user"></i></span>
+                </div>
+
+                <!-- Tipo de documento -->
+                <div class="wrap-input100 validate-input mb-2">
+                    <select class="input100 select100" id="tipo_documento" name="tipo_documento" required>
+                        <option value="" disabled selected hidden>Tipo de documento</option>
+                        <option value="CC">Cédula de ciudadanía</option>
+                        <option value="TI">Tarjeta de identidad</option>
+                    </select>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100"><i class="fa fa-id-card"></i></span>
+                </div>
+
+                <!-- Número de documento -->
+                <div class="wrap-input100 validate-input mb-2">
+                    <input class="input100" type="number" id="numero_documento" name="numero_documento" required min="1" placeholder="Número de documento">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100"><i class="fa fa-hashtag"></i></span>
+                </div>
+
+                <!-- Tipo de contrato -->
+                <div class="wrap-input100 validate-input mb-2">
+                    <select class="input100 select100" id="tipo_contrato" name="tipo_contrato" required>
+                        <option value="" disabled selected hidden>Tipo de contrato</option>
+                        <option value="fijo">Término fijo</option>
+                        <option value="indefinido">Término indefinido</option>
+                        <option value="obra">Por obra o labor</option>
+                    </select>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100"><i class="fa fa-file-text"></i></span>
+                </div>
+
+                <!-- Jornada -->
+                <div class="wrap-input100 validate-input mb-2">
+                    <select class="input100 select100" id="jornada" name="jornada" required>
+                        <option value="" disabled selected hidden>Jornada</option>
+                        <option value="completa">Tiempo completo</option>
+                        <option value="medio">Medio tiempo</option>
+                        <option value="turnos">Por turnos</option>
+                    </select>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100"><i class="fa fa-clock-o"></i></span>
+                </div>
+
+                <!-- Cargo -->
+                <div class="wrap-input100 validate-input mb-2">
+                    <input class="input100" type="text" id="cargo" name="cargo" required placeholder="Cargo">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100"><i class="fa fa-briefcase"></i></span>
+                </div>
+
+                <!-- Sede -->
+                <div class="wrap-input100 validate-input mb-2">
+                    <input class="input100" type="text" id="sede" name="sede" required placeholder="Sede">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100"><i class="fa fa-building"></i></span>
+                </div>
+
+                <!-- Fecha de ingreso -->
+                <div class="wrap-input100 validate-input mb-2">
+                    <input class="input100" type="date" id="fecha_ingreso" name="fecha_ingreso" required placeholder="Fecha de ingreso">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100"><i class="fa fa-calendar"></i></span>
+                </div>
+
+                <!-- Tipo de salario -->
+                <div class="wrap-input100 validate-input mb-2">
+                    <select class="input100 select100" id="tipo_salario" name="tipo_salario" required>
+                        <option value="" disabled selected hidden>Tipo de salario</option>
+                        <option value="fijo">Salario fijo</option>
+                        <option value="variable">Salario variable</option>
+                    </select>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100"><i class="fa fa-list-alt"></i></span>
+                </div>
+
+                <!-- Salario básico -->
+                <div class="wrap-input100 validate-input mb-2">
+                    <input class="input100" type="number" id="salario_basico" name="salario_basico" required min="0" placeholder="Salario básico mensual">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100"><i class="fa fa-money"></i></span>
+                </div>
+
+                <!-- Ciudad -->
+                <div class="wrap-input100 validate-input mb-2">
+                    <input class="input100" type="text" id="ciudad" name="ciudad" required placeholder="Ciudad">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100"><i class="fa fa-map-marker"></i></span>
+                </div>
+
+                <!-- Dirección -->
+                <div class="wrap-input100 validate-input mb-2">
+                    <input class="input100" type="text" id="direccion" name="direccion" required placeholder="Dirección">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100"><i class="fa fa-map-marker"></i></span>
+                </div>
+
+                <!-- Correo electrónico -->
+                <div class="wrap-input100 validate-input mb-2">
+                    <input class="input100" type="email" id="correo" name="correo" required placeholder="Correo electrónico">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100"><i class="fa fa-envelope"></i></span>
+                </div>
+
+                <!-- Teléfono -->
+                <div class="wrap-input100 validate-input mb-2">
+                    <input class="input100" type="tel" id="telefono" name="telefono" required pattern="[0-9]{7,10}" placeholder="Teléfono (7 a 10 dígitos)">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100"><i class="fa fa-phone"></i></span>
+                </div>
+
+                <!-- EPS -->
+                <div class="wrap-input100 validate-input mb-2">
+                    <select class="input100 select100" id="eps" name="eps" required>
+                        <option value="" disabled selected hidden>EPS</option>
+                        <option value="sura">Sura</option>
+                        <option value="sanitas">Sanitas</option>
+                        <option value="nueva_eps">Nueva EPS</option>
+                    </select>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100"><i class="fa fa-medkit"></i></span>
+                </div>
+
+                <!-- Fondo de pensiones -->
+                <div class="wrap-input100 validate-input mb-2">
+                    <select class="input100 select100" id="fondo_pensiones" name="fondo_pensiones" required>
+                        <option value="" disabled selected hidden>Fondo de pensión</option>
+                        <option value="porvenir">Porvenir</option>
+                        <option value="colfondos">Colfondos</option>
+                        <option value="proteccion">Protección</option>
+                    </select>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100"><i class="fa fa-pie-chart"></i></span>
+                </div>
+
+                <!-- ARL -->
+                <div class="wrap-input100 validate-input mb-2">
+                    <select class="input100 select100" id="arl" name="arl" required>
+                        <option value="" disabled selected hidden>ARL</option>
+                        <option value="sura">Sura</option>
+                        <option value="positiva">Positiva</option>
+                        <option value="colmena">Colmena</option>
+                    </select>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100"><i class="fa fa-shield"></i></span>
+                </div>
+
+                <!-- Caja de compensación -->
+                <div class="wrap-input100 validate-input mb-2">
+                    <select class="input100 select100" id="caja_compensacion" name="caja_compensacion" required>
+                        <option value="" disabled selected hidden>Caja de compensación familiar</option>
+                        <option value="compensar">Compensar</option>
+                        <option value="cafam">Cafam</option>
+                        <option value="colsubsidio">Colsubsidio</option>
+                    </select>
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100"><i class="fa fa-home"></i></span>
+                </div>
+
+                <!-- Foto del empleado -->
+                <div class="wrap-input100 mb-3">
+                    <label for="imagen" class="form-label">Foto del empleado:</label>
+                    <input class="form-control" type="file" id="imagen" name="imagen" accept="image/*">
+                </div>
+
+                <!-- Botones -->
+                <div class="d-flex justify-content-between mt-4">
+                    <button class="login100-form-btn btn btn-primary" type="button" onclick="registrarEmpleado()">Registrar</button>
+                    <button class="login100-form-btn btn btn-secondary" type="button" id="btnVolver">Volver</button>
+                </div>
+
+                <!-- Mensajes de alerta -->
+                <div id="alertaEmpleado" class="mt-3"></div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('btnVolver').addEventListener('click', () => {
+    window.location.href = '/inicio/'; // Página de inicio
+});
+
+function mostrarAlerta(mensaje, tipo='danger') {
+    const alertaDiv = document.getElementById('alertaEmpleado');
+    alertaDiv.innerHTML = `<div class="alert alert-${tipo}">${mensaje}</div>`;
+}
+
+function validarEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+async function registrarEmpleado() {
+    const form = document.getElementById('formEmpleado');
+    const formData = new FormData();
+
+    const camposTexto = [
+        "nombres", "apellidos", "numero_documento", "cargo", "sede", "fecha_ingreso",
+        "salario_basico", "ciudad", "direccion", "correo", "telefono"
+    ];
+
+    // Validar campos de texto
+    for (const campo of camposTexto) {
+        const input = document.getElementById(campo);
+        const valor = input.value.trim();
+
+        if (!valor) {
+            mostrarAlerta(`⚠️ El campo "${campo.replace("_", " ")}" no puede estar vacío.`);
+            return;
+        }
+
+        if ((campo === "nombres" || campo === "apellidos") && !/^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$/.test(valor)) {
+            mostrarAlerta(`⚠️ El campo "${campo}" solo puede contener letras y espacios.`);
+            return;
+        }
+
+        if (campo === "numero_documento" && (isNaN(valor) || valor <= 0)) {
+            mostrarAlerta("⚠️ El número de documento debe ser un número positivo.");
+            return;
+        }
+
+        if (campo === "salario_basico" && (isNaN(valor) || valor < 0)) {
+            mostrarAlerta("⚠️ El salario básico debe ser mayor o igual a 0.");
+            return;
+        }
+
+        if (campo === "telefono" && !/^\d{7,10}$/.test(valor)) {
+            mostrarAlerta("⚠️ El teléfono debe tener entre 7 y 10 dígitos numéricos.");
+            return;
+        }
+
+        if (campo === "correo" && !validarEmail(valor)) {
+            mostrarAlerta("⚠️ El correo electrónico no es válido.");
+            return;
+        }
+
+        if (campo === "fecha_ingreso") {
+            const hoy = new Date();
+            const fecha = new Date(valor);
+            if (isNaN(fecha.getTime())) {
+                mostrarAlerta("⚠️ La fecha de ingreso no es válida.");
+                return;
+            }
+            if (fecha > hoy) {
+                mostrarAlerta("⚠️ La fecha de ingreso no puede ser futura.");
+                return;
+            }
+        }
+
+        formData.append(campo, valor);
+    }
+
+    // Validar selects
+    const selects = [
+        "tipo_documento", "tipo_contrato", "jornada", "tipo_salario", "eps",
+        "fondo_pensiones", "arl", "caja_compensacion"
+    ];
+
+    for (const select of selects) {
+        const valor = document.getElementById(select).value;
+        if (!valor) {
+            mostrarAlerta(`⚠️ Debe seleccionar un valor para "${select.replace("_", " ")}".`);
+            return;
+        }
+        formData.append(select, valor);
+    }
+
+    // Imagen opcional
+    const imagen = document.getElementById("imagen").files[0];
+    if (imagen) {
+        const tiposPermitidos = ["image/jpeg", "image/png", "image/jpg"];
+        if (!tiposPermitidos.includes(imagen.type)) {
+            mostrarAlerta("⚠️ La imagen debe ser JPG o PNG.");
+            return;
+        }
+        formData.append("imagen", imagen);
+    }
+
+    // Enviar datos al servidor
+    try {
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+		const respuesta = await fetch("{% url 'registrar_empleado' %}", {
+			method: "POST",
+			body: formData,
+			headers: {
+				'X-CSRFToken': csrftoken
+			}
+		});
+        const resultado = await respuesta.json();
+        if (respuesta.ok) {
+            mostrarAlerta(resultado.mensaje, 'success');
+            form.reset();
+        } else {
+            mostrarAlerta(resultado.error);
+        }
+    } catch (error) {
+        console.error(error);
+        mostrarAlerta("❌ Error al conectar con el servidor.");
+    }
+}
+</script>
+
+<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+<script src="{% static 'vendor/tilt/tilt.jquery.min.js' %}"></script>
+<script>
+    $('.js-tilt').tilt({ scale: 1.1 });
+</script>
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>
