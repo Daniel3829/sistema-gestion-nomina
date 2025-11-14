@@ -4,12 +4,10 @@ Django settings for TecNomina project.
 
 import os
 import dj_database_url
-from dotenv import load_dotenv
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv()  # Cargar .env si existe
 
 # -------------------------
 # 🔐 Seguridad
@@ -130,8 +128,7 @@ THOUSAND_SEPARATOR = '.'
 # 📁 Archivos estáticos y media
 # -------------------------
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'   # Para Render
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     BASE_DIR / 'principal' / 'static'    # Tu carpeta static local
 ]
