@@ -80,23 +80,17 @@ WSGI_APPLICATION = 'TecNomina.wsgi.application'
 # 🗄️ Base de datos
 # -------------------------
 
-if os.environ.get("DATABASE_URL"):
-    # 🌐 Render
-    DATABASES = {
-        'default': dj_database_url.parse(
-            os.environ["DATABASE_URL"],
-            conn_max_age=600,
-            ssl_require=True
-        )
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'nomina_db_lz4h',
+        'USER': 'nomina_db_lz4h_user',
+        'PASSWORD': 'jBOOwOSKgUPVOLQx6Gc8WbkjtZA8fgLi',
+        'HOST': 'dpg-d4bo5aer433s73d2fcd0-a.oregon-postgres.render.com',
+        'PORT': '5432',
     }
-else:
-    # 💻 Modo local → SQLite
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+}
+
 
 
 # -------------------------
