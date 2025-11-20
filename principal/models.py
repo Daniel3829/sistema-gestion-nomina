@@ -33,7 +33,7 @@ class Empleado(models.Model):
     fondo_pensiones = models.CharField(max_length=100)
     arl = models.CharField(max_length=100)
     caja_compensacion = models.CharField(max_length=100)
-    imagen = models.ImageField(upload_to='empleados/', null=True, blank=True)
+    imagen = models.ImageField(null=True, blank=True)
 
     # --- pagos ---
     horas_extra_diurna = models.DecimalField(max_digits=8, decimal_places=2, default=0)

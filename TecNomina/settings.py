@@ -131,11 +131,13 @@ STATICFILES_DIRS = [
 # ⭐ WhiteNoise permite servir archivos comprimidos
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-CLOUDINARY_URL = "cloudinary://589592339746747:HteVRifVAI_Y4rfeU7cFDxqcRjE@ds6rjhqzn"
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-cloudinary.config(cloudinary_url=CLOUDINARY_URL)
-
-DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+cloudinary.config(
+    cloud_name=os.getenv('CLOUDINARY_CLOUD_NAME'),
+    api_key=os.getenv('CLOUDINARY_API_KEY'),
+    api_secret=os.getenv('CLOUDINARY_API_SECRET')
+)
 
 # -------------------------
 # 🔑 Login
