@@ -6,6 +6,8 @@ import json
 import traceback
 import re
 import secrets
+import os
+import logging
 from datetime import timedelta
 from datetime import datetime
 from decimal import Decimal
@@ -19,6 +21,7 @@ from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.contrib.auth.hashers import make_password, check_password
 from django.db.models import Sum
 from django.contrib import messages
+from django.utils import timezone
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.tokens import default_token_generator
@@ -39,6 +42,8 @@ from reportlab.pdfgen import canvas
 from reportlab.lib import colors
 from reportlab.platypus import Table, TableStyle, Paragraph, SimpleDocTemplate, Spacer, Image
 from reportlab.lib.styles import getSampleStyleSheet
+from sib_api_v3_sdk import Configuration, ApiClient, TransactionalEmailsApi, SendSmtpEmail
+from sib_api_v3_sdk.rest import ApiException
 
 # ---------------------------------------------
 # 🔹 Local App Imports
@@ -147,9 +152,9 @@ def login(request):
 
 
 # ---------------------------------------------
-# 🔹 Recuperar contraseña
+# 🔹 Recuperar contraseña Gmail SMTP
 # ---------------------------------------------
-
+"""
 def recuperar_contraseña(request):
     if request.method == "POST":
         email = request.POST.get("email", "").strip()
@@ -185,17 +190,17 @@ def recuperar_contraseña(request):
 
         asunto = "Restablece tu contraseña - TecNomina"
         mensaje = f"""
-Hola {empresa.razon_social},
+#Hola {empresa.razon_social},
 
-Has solicitado restablecer tu contraseña.
+#Has solicitado restablecer tu contraseña.
 
-Haz clic en el siguiente enlace para crear una nueva contraseña:
+#Haz clic en el siguiente enlace para crear una nueva contraseña:
 
-👉 {enlace}
+#👉 {enlace}
 
-Este enlace expirará en 1 hora.
+#Este enlace expirará en 1 hora.
 
-Si no solicitaste esto, ignora este mensaje.
+#Si no solicitaste esto, ignora este mensaje.
 """
 
         send_mail(asunto, mensaje, None, [email], fail_silently=False)
@@ -215,6 +220,157 @@ def restablecer_contraseña(request, token):
         return render(request, "token_invalido.html")
 
     # Verificar si expiró
+    if timezone.now() > empresa.token_expira:
+        return render(request, "token_expirado.html")
+
+    if request.method == "POST":
+        nueva1 = request.POST.get("nueva1")
+        nueva2 = request.POST.get("nueva2")
+
+        if nueva1 != nueva2:
+            messages.error(request, "Las contraseñas no coinciden.")
+            return redirect(request.path)
+
+        # Guardar contraseña encriptada
+        empresa.contraseña = make_password(nueva1)
+
+        # Borrar token
+        empresa.token_recuperacion = None
+        empresa.token_expira = None
+
+        empresa.save()
+
+        messages.success(request, "Tu contraseña fue actualizada correctamente.")
+        return redirect("login")
+
+    return render(request, "restablecer_form.html", {"empresa": empresa}) """
+
+logger = logging.getLogger(__name__)
+
+# ---------- Helper: enviar correo usando la API de Brevo ----------
+def enviar_correo_brevo(destino: str, asunto: str, texto: str, html: str | None = None) -> bool:
+    """
+    Envía un correo a través de la API de Brevo (TransactionalEmailsApi).
+    Devuelve True si el envío parece correcto, False si ocurre un error.
+    """
+    api_key = os.getenv("BREVO_API_KEY")
+    remitente = os.getenv("BREVO_EMAIL")
+
+    if not api_key or not remitente:
+        logger.error("BREVO_API_KEY o BREVO_EMAIL no están configurados en las variables de entorno.")
+        return False
+
+    configuration = Configuration()
+    configuration.api_key["api-key"] = api_key
+
+    api_instance = TransactionalEmailsApi(ApiClient(configuration))
+
+    email = SendSmtpEmail(
+        to=[{"email": destino}],
+        sender={"email": remitente},
+        subject=asunto,
+        text_content=texto,
+    )
+    # Si deseas enviar HTML, incluye html_content
+    if html:
+        email.html_content = html
+
+    try:
+        api_instance.send_transac_email(email)
+        logger.info("Correo enviado por Brevo a %s", destino)
+        return True
+    except ApiException as e:
+        logger.exception("Error API Brevo al enviar correo a %s: %s", destino, getattr(e, "body", str(e)))
+        return False
+    except Exception as e:
+        logger.exception("Error inesperado al enviar correo por Brevo: %s", str(e))
+        return False
+
+
+# -----------------------------
+# Recuperar contraseña
+# -----------------------------
+def recuperar_contraseña(request):
+    if request.method == "POST":
+        email = request.POST.get("email", "").strip()
+
+        if not email:
+            messages.error(request, "Ingrese un correo.")
+            return redirect("recuperar")
+
+        try:
+            empresa = Empresa.objects.get(correo=email)
+        except Empresa.DoesNotExist:
+            empresa = None
+
+        # Mensaje informativo (siempre)
+        messages.info(request, "Si el correo está registrado, enviaremos instrucciones.")
+
+        # Si no existe, no enviamos nada pero mostramos la pantalla de confirmación
+        if not empresa:
+            return redirect("correo_enviado")
+
+        # Crear token seguro
+        token = secrets.token_urlsafe(32)
+
+        # Guardar token y fecha de expiración
+        empresa.token_recuperacion = token
+        empresa.token_expira = timezone.now() + timedelta(hours=1)
+        empresa.save()
+
+        # Construir enlace absoluto
+        enlace = request.build_absolute_uri(
+            reverse("restablecer", kwargs={"token": token})
+        )
+
+        asunto = "Restablece tu contraseña - TecNomina"
+        mensaje_texto = f"""Hola {empresa.razon_social},
+
+Has solicitado restablecer tu contraseña.
+
+Haz clic en el siguiente enlace para crear una nueva contraseña:
+
+{enlace}
+
+Este enlace expirará en 1 hora.
+
+Si no solicitaste esto, ignora este mensaje.
+"""
+
+        # (Opcional) HTML simple para mejor presentación
+        mensaje_html = f"""
+<p>Hola <strong>{empresa.razon_social}</strong>,</p>
+<p>Has solicitado restablecer tu contraseña.</p>
+<p><a href="{enlace}">Haz clic aquí para crear una nueva contraseña</a></p>
+<p>Este enlace expirará en 1 hora.</p>
+<p>Si no solicitaste esto, ignora este mensaje.</p>
+"""
+
+        # Enviar por Brevo (API). No debe bloquear la vista si falla.
+        enviado = enviar_correo_brevo(email, asunto, mensaje_texto, mensaje_html)
+        if not enviado:
+            # Ya registramos el error en logs; no mostramos detalles al usuario
+            logger.warning("No se pudo enviar el correo de recuperación a %s (se continuará el flujo).", email)
+
+        return redirect("correo_enviado")
+
+    return render(request, "recuperar_contrasena.html")
+
+
+def correo_enviado(request):
+    return render(request, "correo_enviado.html")
+
+
+# -----------------------------
+# Restablecer la contraseña
+# -----------------------------
+def restablecer_contraseña(request, token):
+    try:
+        empresa = Empresa.objects.get(token_recuperacion=token)
+    except Empresa.DoesNotExist:
+        return render(request, "token_invalido.html")
+
+    # Verificar expiración
     if timezone.now() > empresa.token_expira:
         return render(request, "token_expirado.html")
 
