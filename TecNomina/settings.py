@@ -4,7 +4,11 @@ Django settings for TecNomina project.
 
 import os
 import dj_database_url
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 from pathlib import Path
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -134,12 +138,11 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 MEDIA_URL = '/media/'
 
-CLOUDINARY = {
-    'cloud_name': os.getenv('CLOUDINARY_CLOUD_NAME'),
-    'api_key': os.getenv('CLOUDINARY_API_KEY'),
-    'api_secret': os.getenv('CLOUDINARY_API_SECRET')
-}
-
+cloudinary.config(
+    cloud_name=os.getenv('CLOUDINARY_CLOUD_NAME'),
+    api_key=os.getenv('CLOUDINARY_API_KEY'),
+    api_secret=os.getenv('CLOUDINARY_API_SECRET')
+)
 
 # -------------------------
 # 🔑 Login
@@ -169,7 +172,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False  # ← evita conflictos SSL en Render
 EMAIL_HOST_USER = os.getenv("BREVO_EMAIL")        # correo remitente
-EMAIL_HOST_PASSWORD = os.getenv("BREVO_SMTP_KEY") # clave SMTP/API
+EMAIL_HOST_PASSWORD = os.getenv("BREVO_API_KEY") # clave SMTP/API
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # -------------------------
