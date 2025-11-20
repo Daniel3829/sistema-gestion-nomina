@@ -150,16 +150,26 @@ LOGOUT_REDIRECT_URL = '/login/'
 
 
 # -------------------------
-# 📧 Email
+# 📧 Gmail
 # -------------------------
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_PORT = 587
+#EMAIL_USE_TLS = True
+#EMAIL_HOST_USER = 'tecnomina91@gmail.com'
+#EMAIL_HOST_PASSWORD = 'hike xaik qsll dehj'
+#DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# -------------------------
+# 📧 Email con Brevo (Sendinblue)
+# -------------------------
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp-relay.brevo.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'tecnomina91@gmail.com'
-EMAIL_HOST_PASSWORD = 'hike xaik qsll dehj'
+EMAIL_HOST_USER = os.getenv("BREVO_EMAIL")        # correo remitente
+EMAIL_HOST_PASSWORD = os.getenv("BREVO_SMTP_KEY") # clave SMTP/API
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-
 
 # -------------------------
 # 🪵 Logs
