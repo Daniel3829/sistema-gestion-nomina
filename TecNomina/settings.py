@@ -167,6 +167,7 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp-relay.brevo.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False  # ← evita conflictos SSL en Render
 EMAIL_HOST_USER = os.getenv("BREVO_EMAIL")        # correo remitente
 EMAIL_HOST_PASSWORD = os.getenv("BREVO_SMTP_KEY") # clave SMTP/API
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
